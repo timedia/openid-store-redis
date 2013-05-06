@@ -1,9 +1,9 @@
 require "openid/store/redis/version"
+require "openid/store/interface"
 
-module Openid
+module OpenID
   module Store
-    module Redis
-      # Your code goes here...
+    class Redis < Interface
     end
   end
 end

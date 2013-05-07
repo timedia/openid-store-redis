@@ -1,4 +1,4 @@
-Copyright (c) 2013 Ville Lautanala
+Copyright (c) 2013 Rally Software Development Corp
 
 MIT License
 

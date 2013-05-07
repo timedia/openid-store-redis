@@ -1,6 +1,6 @@
-# Openid::Store::Redis
+# OpenID::Store::Redis
 
-TODO: Write a gem description
+A Redis storage backend for ruby-openid
 
 ## Installation
 
@@ -18,7 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Set up OpenID consumer (or provider) using Redis store
+
+```ruby
+redis = Redis.new
+store = OpenID::Store::Redis.new(redis)
+@consumer = OpenID::Consumer.new(session, store)
+```
+
+If you're using Omniauth
+
+```ruby
+use OmniAuth::Builder do
+  provider :open_id, :store => OpenID::Store::Redis.new(Redis.new)
+end
+```
+
+Redis store defaults to ```Redis.current``` when Redis client is not defined.
+
 
 ## Contributing
 
@@ -27,3 +44,9 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Copyright
+
+© Rally Software Development Corp. Released under MIT license, see
+[LICENSE](https://github.com/RallySoftware/openid-redis-store/blob/master/LICENSE.txt)
+for details.

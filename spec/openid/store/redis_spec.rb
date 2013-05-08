@@ -6,8 +6,8 @@ Nonce = OpenID::Nonce
 
 describe OpenID::Store::Redis do
   let(:redis) { MockRedis.new }
-  let(:url) { 'https://example.com/' + SecureRandom.urlsafe_base64 }
-  let(:handle) { SecureRandom.urlsafe_base64 }
+  let(:url) { 'https://example.com/' + SecureRandom.base64 }
+  let(:handle) { SecureRandom.base64 }
 
   subject { OpenID::Store::Redis.new(redis) }
 

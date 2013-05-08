@@ -1,11 +1,12 @@
 require "openid/store/redis/version"
 require "openid/store/interface"
+require "redis"
 
 module OpenID
   module Store
     class Redis < Interface
       attr_reader :prefix
-      def initialize(client, prefix = "openid-store")
+      def initialize(client = ::Redis.current, prefix = "openid-store")
         @redis = client
         @prefix = prefix
       end

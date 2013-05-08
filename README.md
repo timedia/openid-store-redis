@@ -34,8 +34,8 @@ use OmniAuth::Builder do
 end
 ```
 
-Redis store defaults to ```Redis.current``` when Redis client is not defined.
-
+Redis store defaults to ```Redis.current``` when Redis client is not given as
+argument to store.
 
 ## Contributing
 

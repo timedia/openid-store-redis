@@ -48,5 +48,5 @@ argument to store.
 ## Copyright
 
 © Rally Software Development Corp. Released under MIT license, see
-[LICENSE](https://github.com/RallySoftware/openid-redis-store/blob/master/LICENSE.txt)
+[LICENSE](https://github.com/RallySoftware/openid-store-redis/blob/master/LICENSE.txt)
 for details.

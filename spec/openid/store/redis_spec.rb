@@ -122,7 +122,7 @@ end
 
 def association(issued, lifetime=600)
    OpenID::Association.new(SecureRandom.hex(128),
-                           SecureRandom.urlsafe_base64(20),
+                           SecureRandom.base64(20),
                            Time.now + issued,
                            lifetime,
                            'HMAC-SHA1')

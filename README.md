@@ -1,4 +1,4 @@
-# OpenID::Store::Redis
+# OpenID::Store::Redis [![Build Status](https://travis-ci.org/RallySoftware/openid-store-redis.png)](https://travis-ci.org/RallySoftware/openid-store-redis)
 
 A Redis storage backend for ruby-openid
 

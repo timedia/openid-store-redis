@@ -118,6 +118,63 @@ describe OpenID::Store::Redis do
       ttl.should eql(OpenID::Nonce.skew + 5)
     end
   end
+
+  describe '#cleanup_nonces' do
+    before :each do
+      ts, salt = Nonce::split_nonce(Nonce::mk_nonce)
+      subject.use_nonce(url, ts.to_i, salt)
+    end
+
+    it 'removes nonces from redis' do
+      subject.cleanup_nonces
+      redis.keys.should be_empty
+    end
+
+    it 'leaves association data' do
+      redis.set 'openid-store:a:url', 'testtest'
+      subject.cleanup_nonces
+      redis.keys.should have(1).item
+    end
+  end
+
+  describe '#cleanup_associations' do
+    before :each do
+      assoc = association(0)
+      redis.set('openid-store:a:' + url + ":" + assoc.handle, Marshal.dump(assoc))
+    end
+
+    it 'removes association data' do
+      subject.cleanup_associations
+      redis.keys.should be_empty
+    end
+
+    it 'leaves nonce data' do
+      ts, salt = Nonce::split_nonce(Nonce::mk_nonce)
+      subject.use_nonce(url, ts.to_i, salt)
+      subject.cleanup_associations
+      redis.keys.should have(1).item
+    end
+  end
+
+  describe '#cleanup' do
+    before :each do
+      ts, salt = Nonce::split_nonce(Nonce::mk_nonce)
+      subject.use_nonce(url, ts.to_i, salt)
+      assoc = association(0)
+      redis.set('openid-store:a:' + url + ":" + assoc.handle, Marshal.dump(assoc))
+    end
+
+    it 'removes redis store data' do
+      subject.cleanup
+      redis.keys.should be_empty
+    end
+
+    it 'leaves other data around' do
+      redis.set 'something-else', 'is still there'
+      subject.cleanup
+      redis.get('something-else').should == 'is still there'
+    end
+  end
 end
 
 def association(issued, lifetime=600)

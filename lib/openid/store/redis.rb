@@ -58,16 +58,34 @@ module OpenID
         end
       end
 
-      def cleanup_nonces
-      end
-
-      def cleanup
-      end
-
+      # Cleanup associations from Redis
+      # This iterates over Redis keys, so it's better to rely on TTLs in
+      # production environments.
       def cleanup_associations
+        remove_keys(':a:*')
+      end
+
+      # Cleanup nonces from Redis
+      # This iterates over Redis keys, so it's better to rely on TTLs in
+      # production environments.
+      def cleanup_nonces
+        remove_keys(':n:*')
+      end
+
+      # Cleanup all OpenID data from Redis
+      # This iterates over Redis keys, so it's better to rely on TTLs in
+      # production environments.
+      def cleanup
+        remove_keys(':*')
       end
 
       private
+
+      def remove_keys(pattern)
+        @redis.keys(prefix + pattern).each do |key|
+          @redis.del(key)
+        end
+      end
 
       def assoc_key(server_url, assoc_handle=nil)
         key = prefix + ':a:' + server_url

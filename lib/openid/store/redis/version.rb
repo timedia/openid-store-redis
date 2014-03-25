@@ -1,5 +1,5 @@
 module OpenID
   module Store
-    REDIS_VERSION = "0.1.0"
+    REDIS_VERSION = "1.0.0"
   end
 end

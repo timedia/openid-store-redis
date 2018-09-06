@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 1.9.3'
 
   spec.add_runtime_dependency "ruby-openid", ">= 2.1.7"
-  spec.add_runtime_dependency "redis", "~> 3.0"
+  spec.add_runtime_dependency "redis", ">= 4.0"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"

@@ -6,3 +6,5 @@ rvm:
   - 2.5.1
   - rubinius-3.10
   - jruby-head
+before_install:
+  - gem install bundler -v 1.16.4
